@@ -517,7 +517,7 @@ namespace ScriptPlayer.Shared.Scripts
                     bool previousIsLow = previous.Position < 50;
                     bool nextIsLow = action.Position < 50;
 
-                    TimeSpan duration = action.TimeStamp - previous.TimeStamp;
+                    TimeSpan duration = (action.TimeStamp - previous.TimeStamp) - (gapgap.Multiply(2));
                     if (duration > MinGapDuration)
                     {
                         additionalActions.AddRange(GenerateGapFiller(FillGapPattern, previous.TimeStamp.Add(gapgap),
@@ -571,7 +571,7 @@ namespace ScriptPlayer.Shared.Scripts
             shouldBeEven = !shouldBeEven;
 
             int fillers = Round(approximateFillers, shouldBeEven);
-
+            if (fillers == 0) return additionalActions;
             //for (int i = 0; i <= fillers; i++)
             //{
             //    additionalActions.Add(new FunScriptAction

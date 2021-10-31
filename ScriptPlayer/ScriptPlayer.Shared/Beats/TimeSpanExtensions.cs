@@ -11,6 +11,7 @@ namespace ScriptPlayer.Shared
 
         public static TimeSpan Divide(this TimeSpan t1, double value)
         {
+            if (value == 0) throw new DivideByZeroException();
             return TimeSpan.FromTicks((long)(t1.Ticks / value));
         }
 
